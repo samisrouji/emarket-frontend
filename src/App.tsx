@@ -1,4 +1,3 @@
-import React from "react";
 import { Header } from "./components/Header";
 import { ProductCard } from "./components/ProductCard";
 import "./App.css";

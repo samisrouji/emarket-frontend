@@ -2,19 +2,43 @@
   display: flex;
   align-items: center;
   padding: 10px 20px;
-  background-color: #f5f5f5;
+  background-color: #100000;
+  width: 100%;
 }
 
 .logo {
-  font-size: 24px;
-  font-weight: bold;
+  height: 40px;
   margin-right: 20px;
 }
 
+/* Wrap input + button in a flex container */
+.search-container {
+  display: flex;
+  flex: 1; /* take remaining space */
+  max-width: calc(100% - 150px); /* leaves space for logo + padding */
+}
+
 .search-bar {
-  flex: 1; /* Takes all remaining horizontal space */
+  flex: 1; /* input takes all space */
   padding: 8px 12px;
   font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px; /* round left corners */
+  border: 1px solid #c6c6c6;
+  border-right: none; /* remove right border to connect with button */
+}
+
+.search-button {
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid #c6c6c6;
+  border-left: none; /* remove left border to connect with input */
+  border-radius: 0 5px 5px 0; /* round right corners */
+  background-color: #393939; /* green button color */
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.search-button:hover {
+  background-color: #393939;
 }
