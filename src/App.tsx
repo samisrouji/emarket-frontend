@@ -17,6 +17,7 @@ interface Product {
 function App() {
   const [products, setProducts] = useState<Product[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [cart, setCart] = useState<Record<number, number>>({});
 
   // Fetch products from backend
   useEffect(() => {
@@ -31,16 +32,43 @@ function App() {
     .filter((p) => p.isAvailable)
     .filter((p) => p.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
+  const addToCart = (productId: number) => {
+    setCart((prev) => {
+      const next = { ...prev };
+      next[productId] = (next[productId] || 0) + 1;
+      return next;
+    });
+  };
+
+  const removeFromCart = (productId: number) => {
+    setCart((prev) => {
+      const next = { ...prev };
+      const cur = next[productId] || 0;
+      if (cur <= 1) {
+        delete next[productId];
+      } else {
+        next[productId] = cur - 1;
+      }
+      return next;
+    });
+  };
+
+  const cartCount = Object.values(cart).reduce((s, q) => s + q, 0);
+
   return (
     <div>
-      <Header onSearch={(query) => setSearchQuery(query)} />
+      <Header onSearch={(query) => setSearchQuery(query)} cartCount={cartCount} />
       <div className="product-grid">
         {filteredProducts.map((p) => (
           <ProductCard
             key={p.id}
+            id={p.id}
             name={p.name}
             price={`$${p.price}`} // format price as string
             imageUrl="https://via.placeholder.com/150" // replace with real images if available
+            onAdd={() => addToCart(p.id)}
+            onRemove={() => removeFromCart(p.id)}
+            quantity={cart[p.id] || 0}
           />
         ))}
       </div>
