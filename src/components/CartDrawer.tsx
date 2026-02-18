@@ -12,9 +12,10 @@ interface CartDrawerProps {
   onClose: () => void;
   onAdd: (id: number) => void;
   onRemove: (id: number) => void;
+  onClear?: () => void;
 }
 
-export default function CartDrawer({ items, onClose, onAdd, onRemove }: CartDrawerProps) {
+export default function CartDrawer({ items, onClose, onAdd, onRemove, onClear }: CartDrawerProps) {
   const subtotal = items.reduce((s, it) => {
     const price = Number(String(it.price).replace(/[^0-9.]/g, "")) || 0;
     return s + price * it.quantity;
@@ -49,7 +50,10 @@ export default function CartDrawer({ items, onClose, onAdd, onRemove }: CartDraw
 
       <div className="cart-footer">
         <div className="subtotal">Subtotal: ${subtotal.toFixed(2)}</div>
-        <button className="checkout" disabled={items.length === 0}>Checkout</button>
+        <div className="footer-actions">
+          <button className="clear-button" onClick={() => onClear && onClear()} disabled={items.length === 0}>Clear cart</button>
+          <button className="checkout" disabled={items.length === 0}>Checkout</button>
+        </div>
       </div>
     </aside>
   );

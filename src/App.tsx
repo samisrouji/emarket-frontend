@@ -59,6 +59,8 @@ function App() {
 
   const toggleCart = () => setIsCartOpen((v) => !v);
 
+  const clearCart = () => setCart({});
+
   const cartItems = Object.entries(cart).map(([id, qty]) => {
     const pid = Number(id);
     const prod = products.find((p) => p.id === pid);
@@ -79,6 +81,7 @@ function App() {
           onClose={() => setIsCartOpen(false)}
           onAdd={(id: number) => addToCart(id)}
           onRemove={(id: number) => removeFromCart(id)}
+          onClear={() => clearCart()}
         />
       )}
       <div className="product-grid">

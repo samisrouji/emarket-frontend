@@ -96,6 +96,21 @@
   cursor: pointer;
 }
 
+.footer-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.clear-button {
+  background: transparent;
+  color: #ff6b6b;
+  border: 1px solid #3b3b3b;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
 .close-button {
   background: transparent;
   color: white;
