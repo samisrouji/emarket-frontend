@@ -1,0 +1,41 @@
+.app-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  z-index: 99999;
+}
+
+
+.cursor-outer {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+  /* use CSS variables for position and scale so animations don't clobber translate */
+  --x: 50vw;
+  --y: 50vh;
+  --scale: 1;
+  transform: translate3d(calc(var(--x) - 18px), calc(var(--y) - 18px), 0) scale(var(--scale));
+  transition: background 0.18s, border-color 0.18s;
+  mix-blend-mode: difference;
+  will-change: transform;
+}
+
+.cursor-inner {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #5be0f1;
+  --x: 50vw;
+  --y: 50vh;
+  --scale: 1;
+  transform: translate3d(calc(var(--x) - 6px), calc(var(--y) - 6px), 0) scale(var(--scale));
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  will-change: transform;
+}
+
+/* When interacting with magnetic elements we may change styles dynamically via motion.animate */
