@@ -99,8 +99,3 @@ button:focus-visible {
   color: #213547;
   border-color: #999;
 }
-
-/* Hide the native system cursor everywhere so our motion cursor is the only visible one */
-* {
-  cursor: none !important;
-}

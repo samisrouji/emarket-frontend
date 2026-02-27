@@ -4,7 +4,6 @@ import { Header } from "./components/Header";
 import CartDrawer from "./components/CartDrawer.tsx";
 import { ProductCard } from "./components/ProductCard";
 import "./App.css";
-import Cursor from "./components/Cursor";
 
 // Define Product type to match backend
 interface Product {
@@ -75,7 +74,6 @@ function App() {
 
   return (
     <div>
-      <Cursor />
       <Header onSearch={(query) => setSearchQuery(query)} cartCount={cartCount} onCartClick={toggleCart} />
       {isCartOpen && (
         <CartDrawer

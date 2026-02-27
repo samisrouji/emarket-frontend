@@ -60,10 +60,10 @@ export const Header: React.FC<HeaderProps> = ({ onSearch, cartCount = 0, onCartC
         </button>
 
         {menuOpen && (
-          <div className="logo-menu" role="menu">
-            <button className="logo-menu-item" onClick={handleHome} role="menuitem">Home</button>
-            <button className="logo-menu-item" onClick={toggleView} role="menuitem">View</button>
-            <button className="logo-menu-item logo-menu-item-theme" onClick={toggleTheme} role="menuitem">
+            <div className="logo-menu" role="menu">
+            <button className="logo-menu-item menu-fill" onClick={handleHome} role="menuitem"><span>Home</span></button>
+            <button className="logo-menu-item menu-fill" onClick={toggleView} role="menuitem"><span>View</span></button>
+            <button className="logo-menu-item logo-menu-item-theme menu-fill" onClick={toggleTheme} role="menuitem">
               <span>Theme</span>
               <span className="theme-toggle">{isLight ? "☀️" : "🌙"}</span>
             </button>
