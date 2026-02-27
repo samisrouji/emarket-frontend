@@ -66,3 +66,36 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* Explicit light theme toggle (overrides prefers-color-scheme) */
+.light-theme {
+  color: #213547 !important;
+  background-color: #ffffff !important;
+}
+
+.light-theme body {
+  background-color: #ffffff;
+  color: #213547;
+}
+
+.light-theme button {
+  background-color: #f9f9f9;
+  color: #213547;
+}
+
+.light-theme h1,
+.light-theme h2,
+.light-theme h3,
+.light-theme h4,
+.light-theme h5,
+.light-theme h6,
+.light-theme p {
+  color: #213547;
+}
+
+.light-theme input,
+.light-theme textarea {
+  background-color: #ffffff;
+  color: #213547;
+  border-color: #999;
+}

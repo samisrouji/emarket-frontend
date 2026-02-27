@@ -20,3 +20,8 @@ html, body, #root {
   padding: 20px;
   width: 100%;
 }
+
+/* When user chooses list view, show single column list */
+body.list-view .product-grid {
+  grid-template-columns: 1fr;
+}
