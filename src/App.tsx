@@ -19,7 +19,7 @@ interface Product {
 function App() {
   const [products, setProducts] = useState<Product[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [cart, setCart] = useState<Record<number, number>>({});
+  const [cart, setCart] = useState<Record<number, number>>(loadCartFromLocalStorage);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [page, setPage] = useState<"home" | "signin">("home");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc" | "none">("none");
@@ -34,6 +34,14 @@ function App() {
       .then((response) => setProducts(response.data))
       .catch((error) => console.error("Error fetching products:", error));
   }, [apiBaseUrl]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    } catch (error) {
+      console.error("Failed to save cart to localStorage:", error);
+    }
+  }, [cart]);
 
   // Filter products based on search and availability
   const filteredProducts = useMemo(
@@ -172,6 +180,31 @@ function App() {
       )}
     </div>
   );
+}
+
+function loadCartFromLocalStorage(): Record<number, number> {
+  if (typeof window === "undefined") {
+    return {};
+  }
+
+  try {
+    const stored = localStorage.getItem("cart");
+    if (!stored) return {};
+    const parsed = JSON.parse(stored);
+    if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+      return Object.entries(parsed).reduce((acc, [key, value]) => {
+        const id = Number(key);
+        if (!Number.isNaN(id) && typeof value === "number" && value > 0) {
+          acc[id] = value;
+        }
+        return acc;
+      }, {} as Record<number, number>);
+    }
+  } catch (error) {
+    console.error("Failed to load cart from localStorage:", error);
+  }
+
+  return {};
 }
 
 export default App;
